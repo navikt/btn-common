@@ -33,7 +33,7 @@ publishing {
 
             pom {
                 name.set("btn-common")
-                description.set("Bibliotek for tidslinjer av intervaller relatert til sykefravær")
+                description.set("Bibliotek for kafka konsumenter og produsenter på BTN (Beskjed Til NAV)")
                 url.set("https://github.com/navikt/btn-common")
                 groupId = "no.nav.btn"
                 artifactId = "btn-common"
