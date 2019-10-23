@@ -8,6 +8,8 @@ repositories {
     jcenter()
 }
 
+version = properties["version"] ?: "local"
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
@@ -33,6 +35,8 @@ publishing {
                 name.set("btn-common")
                 description.set("Bibliotek for tidslinjer av intervaller relatert til sykefravær")
                 url.set("https://github.com/navikt/btn-common")
+                groupId = "no.nav.btn"
+                artifactId = "btn-common"
                 licenses {
                     license {
                         name.set("MIT License")
