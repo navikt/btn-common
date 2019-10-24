@@ -1,3 +1,6 @@
+val gsonVersion = "2.8.6"
+val kafkaVersion = "2.3.0"
+
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.50"
     `java-library`
@@ -12,9 +15,10 @@ version = properties["version"] ?: "local"
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("com.google.code.gson:gson:$gsonVersion")
+    implementation("org.apache.kafka:kafka-clients:$kafkaVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
-
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
 
