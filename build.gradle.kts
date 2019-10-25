@@ -1,5 +1,8 @@
 val gsonVersion = "2.8.6"
 val kafkaVersion = "2.3.0"
+val ktorVersion = "1.2.5"
+val prometheusVersion = "0.7.0"
+val micrometerVersion = "1.3.0"
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.50"
@@ -17,6 +20,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.google.code.gson:gson:$gsonVersion")
     implementation("org.apache.kafka:kafka-clients:$kafkaVersion")
+    implementation("io.prometheus:simpleclient_hotspot:$prometheusVersion")
+    implementation("io.prometheus:simpleclient_common:$prometheusVersion")
+    implementation("io.micrometer:micrometer-registry-prometheus:$micrometerVersion")
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
