@@ -1,4 +1,4 @@
-package no.nav.btn
+package no.nav.btn.packet
 
 import com.google.gson.GsonBuilder
 import org.apache.kafka.common.serialization.Deserializer

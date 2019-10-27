@@ -1,5 +1,7 @@
-package no.nav.btn
+package no.nav.btn.kafkaservices
 
+import no.nav.btn.packet.PacketDeserializer
+import no.nav.btn.packet.PacketSerializer
 import org.apache.kafka.clients.CommonClientConfigs
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.producer.ProducerConfig

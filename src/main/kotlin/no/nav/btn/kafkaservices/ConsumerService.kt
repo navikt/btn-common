@@ -1,4 +1,4 @@
-package no.nav.btn
+package no.nav.btn.kafkaservices
 
 import io.ktor.application.call
 import io.ktor.http.ContentType

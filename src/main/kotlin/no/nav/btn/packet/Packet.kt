@@ -1,4 +1,4 @@
-package no.nav.btn
+package no.nav.btn.packet
 
 data class Breadcrumb(val clientId: String)
 
