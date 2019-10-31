@@ -1,8 +1,4 @@
-val gsonVersion = "2.8.6"
-val kafkaVersion = "2.3.0"
-val ktorVersion = "1.2.5"
-val prometheusVersion = "0.7.0"
-val micrometerVersion = "1.3.0"
+val btnBomVersion = "3"
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.50"
@@ -10,20 +6,34 @@ plugins {
     `maven-publish`
 }
 
+val githubUser: String by project
+val githubPassword: String by project
+
 repositories {
     jcenter()
+    mavenCentral()
+    maven("https://dl.bintray.com/kotlin/ktor")
+    maven("http://packages.confluent.io/maven/")
+    maven {
+        url = uri("https://maven.pkg.github.com/navikt/btn-common")
+        credentials {
+            username = githubUser
+            password = githubPassword
+        }
+    }
 }
 
 version = properties["version"] ?: "local"
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("com.google.code.gson:gson:$gsonVersion")
-    implementation("org.apache.kafka:kafka-clients:$kafkaVersion")
-    implementation("io.prometheus:simpleclient_hotspot:$prometheusVersion")
-    implementation("io.prometheus:simpleclient_common:$prometheusVersion")
-    implementation("io.micrometer:micrometer-registry-prometheus:$micrometerVersion")
-    implementation("io.ktor:ktor-server-netty:$ktorVersion")
+    implementation(kotlin("stdlib"))
+    implementation(platform("no.nav.btn:btn-bom:$btnBomVersion"))
+    implementation("com.google.code.gson:gson")
+    implementation("org.apache.kafka:kafka-clients")
+    implementation("io.prometheus:simpleclient_hotspot")
+    implementation("io.prometheus:simpleclient_common")
+    implementation("io.micrometer:micrometer-registry-prometheus")
+    implementation("io.ktor:ktor-server-netty")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
