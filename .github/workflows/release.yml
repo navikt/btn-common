@@ -15,8 +15,13 @@ jobs:
           java-version: '11.x'
       - name: test and build
         run: ./gradlew -Pversion="$(git fetch || true && git rev-list --count $GITHUB_SHA)" build
+        env:
+          ORG_GRADLE_PROJECT_githubUser: x-access-token
+          ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}
       - name: upload artifact
         run: ./gradlew -Pversion="$(git fetch || true && git rev-list --count $GITHUB_SHA)" publish
         env:
           GITHUB_USERNAME: x-access-token
           GITHUB_PASSWORD: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          ORG_GRADLE_PROJECT_githubUser: x-access-token
+          ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}
