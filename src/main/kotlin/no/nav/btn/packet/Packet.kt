@@ -5,5 +5,5 @@ data class Breadcrumb(val clientId: String)
 class Packet (
         val breadcrumbs: List<Breadcrumb>,
         val timestamp: Long,
-        val message: String
+        val melding: String
 )

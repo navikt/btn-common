@@ -1,6 +1,6 @@
 package no.nav.btn.kafkaservices
 
-import no.nav.btn.TOPIC_MULTIPLE_FAILING_SERVICE_CALLS
+import no.nav.btn.TOPIC_DEAD_LETTER
 import no.nav.btn.packet.Breadcrumb
 import no.nav.btn.packet.Packet
 import org.apache.kafka.clients.consumer.ConsumerRecord
@@ -10,18 +10,23 @@ import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.header.internals.RecordHeader
 import org.slf4j.LoggerFactory
 import java.time.Duration
-import java.util.*
 
-private val logger = LoggerFactory.getLogger(RiverWithServiceCall::class.java)
 private const val FAILED_ATTEMPTS_HEADER = "X-Failed-Attempts"
 private const val MAXIMUM_FAILED_ATTEMPTS = 10
 
-abstract class RiverWithServiceCall(
+/**
+ * En Flow er en kafka-konsument som også sender data videre. En Flow tar imot en pakke, gjør noe
+ * (for eksempel et kall til baksystem), lager en ny pakke med ekstra data som er resultat av operasjonen
+ * og sender denne pakken ut på et nytt topic. Dersom operasjonen feiler, sendes pakken ut på et retry-topic
+ * der man kan forsøke igjen.
+ */
+abstract class Flow(
         val consumerTopics: List<String>,
-        val onSuccessfullCallTopic: String,
-        val retryOnFailedCallTopic: String
-) : ConsumerService() {
+        val successfullTopic: String,
+        val retryTopic: String
+) : KafkaConsumerService() {
     lateinit var reproducer: KafkaProducer<String, Packet>
+    private val logger = LoggerFactory.getLogger(Flow::class.java)
 
     private fun initializeReproducer() {
         reproducer = KafkaProducer(getProducerConfig())
@@ -37,15 +42,18 @@ abstract class RiverWithServiceCall(
             while (job.isActive) {
                 val records = consumer.poll(Duration.ofMillis(100))
                 records.asSequence()
-                        .onEach { r -> logger.info("Mottatt ${r.key()}") }
                         .filter { r -> filter(r) }
+                        .onEach { r -> logger.info("$SERVICE_APP_ID har mottatt pakke ${r.key()}") }
                         .map { r ->
                             val result = runCatching {
-                                makeServiceCall(r.value())
+                                onPacketRecieved(r.value())
                             }
                             when {
-                                result.isFailure -> makeFailedProducerRecord(r)
-                                else -> ProducerRecord(onSuccessfullCallTopic, UUID.randomUUID().toString(), addBreadcrumbs(result.getOrThrow()))
+                                result.isFailure -> {
+                                    logger.error("$SERVICE_APP_ID meldte feil på melding: ${errorMessage(result.exceptionOrNull())}")
+                                    makeFailedProducerRecord(r)
+                                }
+                                else -> ProducerRecord(successfullTopic, r.key(), addBreadcrumbs(result.getOrThrow()))
                             }
                         }
                         .forEach { sendRecord(it) }
@@ -53,24 +61,25 @@ abstract class RiverWithServiceCall(
         }
     }
 
-    abstract fun makeServiceCall(packet: Packet): Packet
+    abstract fun onPacketRecieved(packet: Packet): Packet
 
-    private fun filter(record: ConsumerRecord<String, Packet>): Boolean {
-        // TODO: Legg til filter for sett før
+    open fun filter(record: ConsumerRecord<String, Packet>): Boolean {
         return true
     }
 
+    private fun errorMessage(err: Throwable?): String =
+            err?.message ?: "Tom feil"
+
     private fun makeFailedProducerRecord(record: ConsumerRecord<String, Packet>): ProducerRecord<String, Packet> {
-        logger.error("Message failure")
         val failedAttempts = numberOfFailedAttempt(record)
         if (failedAttempts == MAXIMUM_FAILED_ATTEMPTS) {
-            return ProducerRecord(TOPIC_MULTIPLE_FAILING_SERVICE_CALLS,
+            return ProducerRecord(TOPIC_DEAD_LETTER,
                     null,
                     record.key(),
                     record.value(),
                     listOf(RecordHeader(FAILED_ATTEMPTS_HEADER, "$failedAttempts".toByteArray())))
         }
-        return ProducerRecord(retryOnFailedCallTopic,
+        return ProducerRecord(retryTopic,
                 null,
                 record.key(),
                 record.value(),
@@ -81,6 +90,7 @@ abstract class RiverWithServiceCall(
             record.headers()?.lastHeader(FAILED_ATTEMPTS_HEADER)?.value()?.let { String(it).toInt() } ?: 0
 
     private fun sendRecord(producerRecord: ProducerRecord<String, Packet>) {
+        logger.info("$SERVICE_APP_ID sender videre ${producerRecord.key()}")
         reproducer.send(producerRecord)
     }
 
@@ -92,8 +102,8 @@ abstract class RiverWithServiceCall(
     }
 
     private fun addBreadcrumbs(packet: Packet): Packet = Packet(
-            breadcrumbs = packet.breadcrumbs + Breadcrumb("btn-brukermelding-oppgave"),
+            breadcrumbs = packet.breadcrumbs + Breadcrumb(SERVICE_APP_ID),
             timestamp = packet.timestamp,
-            message = packet.message
+            melding = packet.melding
     )
 }

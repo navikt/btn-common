@@ -21,9 +21,9 @@ import org.slf4j.LoggerFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-private val logger = LoggerFactory.getLogger(ConsumerService::class.java)
+private val logger = LoggerFactory.getLogger(KafkaConsumerService::class.java)
 
-abstract class ConsumerService(val bootstrapServer: String = System.getenv("KAFKA_BOOTSTRAP_SERVERS") ?: "localhost:9092") {
+abstract class KafkaConsumerService(val bootstrapServer: String = System.getenv("KAFKA_BOOTSTRAP_SERVERS") ?: "localhost:9092") {
     protected abstract val SERVICE_APP_ID: String
     protected open val HTTP_PORT: Int = 8080
     private val collectorRegistry: CollectorRegistry = CollectorRegistry.defaultRegistry
