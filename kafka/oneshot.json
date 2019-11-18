@@ -1,0 +1,446 @@
+{
+  "topics": [
+    {
+      "topicName": "aapen-btn-meldingSendt",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-meldingLest",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-meldingJournalfoert",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-meldingArkivert",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-meldingOperasjonVellykket",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-opprettOppgaveFeilet",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-avsluttOppgaveFeilet",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-opprettVarselFeilet",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-stoppRevarselFeilet",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-journalfoeringFeilet",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-arkiverMeldingFeilet",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-rapporteringSakOgBehandlingFeilet",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    },
+    {
+      "topicName": "privat-btn-deadLetter",
+      "numPartitions": 3,
+      "members": [
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "PRODUCER"
+        },
+        {
+          "member": "srvbeskjed-til-nav",
+          "role": "CONSUMER"
+        },
+        {
+          "member": "B152650",
+          "role": "MANAGER"
+        },
+        {
+          "member": "U143410",
+          "role": "MANAGER"
+        },
+        {
+          "member": "N139039",
+          "role": "MANAGER"
+        },
+        {
+          "member": "W151211",
+          "role": "MANAGER"
+        },
+        {
+          "member": "B157026",
+          "role": "MANAGER"
+        }
+      ]
+    }
+  ]
+}
