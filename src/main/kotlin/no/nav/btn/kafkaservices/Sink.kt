@@ -10,12 +10,15 @@ import java.time.Duration
  * En Sink er et endepunkt for data, typisk et datalager, for eksempel en database. Kun for konsum,
  * sender ikke data videre.
  */
-abstract class Sink(val consumerTopics: List<String>) : KafkaConsumerService() {
+abstract class Sink(
+        val consumerTopics: List<String>,
+        val credential: KafkaCredential? = null
+) : KafkaConsumerService() {
 
     private val logger = LoggerFactory.getLogger(Sink::class.java)
 
     override fun run() {
-        val consumer = KafkaConsumer<String, Packet>(getConsumerConfig())
+        val consumer = KafkaConsumer<String, Packet>(getConsumerConfig(credential = credential))
         consumer.subscribe(consumerTopics)
         while(job.isActive) {
             val records = consumer.poll(Duration.ofMillis(100))

@@ -56,12 +56,12 @@ abstract class KafkaConsumerService(val bootstrapServer: String = System.getenv(
 
     abstract fun shutdown()
 
-    open fun getConsumerConfig(): Properties {
-        return consumerConfig(groupId = SERVICE_APP_ID, bootstrapServerUrl = bootstrapServer)
+    fun getConsumerConfig(credential: KafkaCredential? = null): Properties {
+        return consumerConfig(groupId = SERVICE_APP_ID, bootstrapServerUrl = bootstrapServer, credential = credential)
     }
 
-    open fun getProducerConfig(): Properties {
-        return producerConfig(clientId = SERVICE_APP_ID + "_producer", bootstrapServers = bootstrapServer)
+    fun getProducerConfig(credential: KafkaCredential? = null): Properties {
+        return producerConfig(clientId = SERVICE_APP_ID + "_producer", bootstrapServers = bootstrapServer, credential = credential)
     }
 
     private fun naisHttpChecks(): ApplicationEngine {
@@ -82,5 +82,4 @@ abstract class KafkaConsumerService(val bootstrapServer: String = System.getenv(
             }
         }
     }
-
 }

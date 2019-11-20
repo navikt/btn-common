@@ -12,10 +12,11 @@ import java.util.*
 class Source(
         val producerTopic: String,
         val clientId: String,
-        bootstrapServer: String = System.getenv("KAFKA_BOOTSTRAP_SERVERS") ?: "localhost:9092"
+        bootstrapServer: String = System.getenv("KAFKA_BOOTSTRAP_SERVERS") ?: "localhost:9092",
+        val credential: KafkaCredential? = null
 ) {
     private val logger = LoggerFactory.getLogger(Source::class.java)
-    private val producer: KafkaProducer<String, Packet> = KafkaProducer(producerConfig(clientId, bootstrapServer))
+    private val producer: KafkaProducer<String, Packet> = KafkaProducer(producerConfig(clientId, bootstrapServer, credential))
 
     fun producePacket(packet: Packet) {
         val uuid = UUID.randomUUID().toString()

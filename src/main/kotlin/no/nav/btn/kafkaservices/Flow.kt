@@ -23,13 +23,14 @@ private const val MAXIMUM_FAILED_ATTEMPTS = 10
 abstract class Flow(
         val consumerTopics: List<String>,
         val successfullTopic: String,
-        val retryTopic: String
+        val retryTopic: String,
+        val credential: KafkaCredential? = null
 ) : KafkaConsumerService() {
     lateinit var reproducer: KafkaProducer<String, Packet>
     private val logger = LoggerFactory.getLogger(Flow::class.java)
 
     private fun initializeReproducer() {
-        reproducer = KafkaProducer(getProducerConfig())
+        reproducer = KafkaProducer(getProducerConfig(credential = credential))
     }
 
     override fun run() {
@@ -37,7 +38,7 @@ abstract class Flow(
             initializeReproducer()
         }
 
-        KafkaConsumer<String, Packet>(getConsumerConfig()).use { consumer ->
+        KafkaConsumer<String, Packet>(getConsumerConfig(credential = credential)).use { consumer ->
             consumer.subscribe(consumerTopics)
             while (job.isActive) {
                 val records = consumer.poll(Duration.ofMillis(100))
